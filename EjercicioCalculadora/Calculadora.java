@@ -1,0 +1,73 @@
+package EjercicioCalculadora;
+
+import java.util.InputMismatchException;
+import java.util.Scanner;
+
+public class Calculadora {
+
+    public static int suma(int num1, int num2) {
+        return num1 + num2;
+    }
+
+    public static int resta(int num1, int num2) {
+        return num1 - num2;
+    }
+
+    public static int multiplicacion(int num1, int num2) {
+        return num1 * num2;
+    }
+
+    public static double division(int num1, int num2) {
+        if (num2 == 0)
+            System.out.println("Error: No se puede dividir entre 0.");
+        return num1 / num2;
+    }
+
+    public static double potencia(int num1, int num2) {
+        return Math.pow(num1, num2);
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int num1 = 0, num2 = 0;
+        double resultado = 0;
+        boolean datosValidos = true;
+        do {
+            sc = new Scanner(System.in);
+            try {
+                System.out.println("Introduzca el primer número: ");
+                num1 = sc.nextInt();
+                System.out.println("Introduzca el segundo número: ");
+                num2 = sc.nextInt();
+                datosValidos = true;
+            } catch (InputMismatchException e) {
+                datosValidos = false;
+                System.out.println("ERROR: Los operandos introducidos deben ser números.");
+            }
+        } while (!datosValidos);
+        System.out.println("Elija la opción que desee realizar: ");
+        String opcion = sc.next();
+        switch (opcion) {
+            case "suma":
+                resultado = suma(num1, num2);
+                break;
+            case "resta":
+                resultado = resta(num1, num2);
+                break;
+            case "multiplicacion":
+                resultado = multiplicacion(num1, num2);
+                break;
+            case "division":
+                try {
+                    resultado = division(num1, num2);
+                } catch (ArithmeticException e) {
+                    System.out.println("El segundo valor no es válido.");
+                }
+                break;
+            case "potencia":
+                resultado = potencia(num1, num2);
+                break;
+        }
+        System.out.println("El resultado de la operación seleccionada es " + resultado);
+    }
+}
